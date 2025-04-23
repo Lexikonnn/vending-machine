@@ -1,0 +1,10 @@
+.content-wrapper{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.content-wrapper>div{
+    display: flex;
+    flex-direction: row;
+}

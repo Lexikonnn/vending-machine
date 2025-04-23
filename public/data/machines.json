@@ -1,0 +1,61 @@
+[
+    {
+      "city": "Praha",
+      "automaty": [
+        {
+          "id": "PRA001",
+          "address": "Václavské náměstí 5",
+          "gps": [50.081, 14.425],
+          "slots": [
+            { "id": "A1", "item": "Bageta" },
+            { "id": "A2", "item": "Sendvič" },
+            { "id": "A3", "item": null },
+            { "id": "A4", "item": "Croissant" },
+            { "id": "A5", "item": null }
+          ]
+        },
+        {
+          "id": "PRA002",
+          "address": "Karlovo náměstí 12",
+          "gps": [50.075, 14.418],
+          "slots": [
+            { "id": "B1", "item": "Jablko" },
+            { "id": "B2", "item": null },
+            { "id": "B3", "item": "Salát" }
+          ]
+        }
+      ]
+    },
+    {
+      "city": "Brno",
+      "automaty": [
+        {
+          "id": "BRN001",
+          "address": "náměstí Svobody 1",
+          "gps": [49.195, 16.608],
+          "slots": [
+            { "id": "C1", "item": "Jogurt" },
+            { "id": "C2", "item": null },
+            { "id": "C3", "item": "Sendvič" },
+            { "id": "C4", "item": "Bageta" }
+          ]
+        }
+      ]
+    },
+    {
+      "city": "Ostrava",
+      "automaty": [
+        {
+          "id": "OST001",
+          "address": "Stodolní 3",
+          "gps": [49.835, 18.292],
+          "slots": [
+            { "id": "D1", "item": "Voda" },
+            { "id": "D2", "item": null },
+            { "id": "D3", "item": null },
+            { "id": "D4", "item": "Čokoláda" }
+          ]
+        }
+      ]
+    }
+  ]
