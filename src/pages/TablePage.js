@@ -2,29 +2,9 @@ import { useFetchData } from "../hooks/useFetchData";
 import { useParams, useNavigate } from "react-router-dom";
 import { useState } from "react"
 import SearchBar from "../components/searchBar/SearchBar";
+import { useSearchFilter } from "../hooks/useSearchFilter";
 import "./styles.css";
 
-
-
-const objectMatchesSearch = (obj, term) => {
-    const lowerTerm = term.toLowerCase();
-
-    return Object.values(obj).some((value) => {
-        if (typeof value === "string" || typeof value === "number") {
-            return String(value).toLowerCase().includes(lowerTerm);
-        }
-
-        if (Array.isArray(value)) {
-            return value.some((item) => typeof item === "string" && item.toLowerCase().includes(lowerTerm));
-        }
-
-        if (typeof value === "object" && value !== null) {
-            return objectMatchesSearch(value, term); // rekurzivní hledání
-        }
-
-        return false;
-    });
-};
 
 
 const TablePage = () => {
@@ -36,14 +16,16 @@ const TablePage = () => {
     const selectedCity = machines?.find((c) => c.city.toLowerCase() === cityId?.toLowerCase());
     const selectedMachine = selectedCity?.automaty.find((m) => m.id === machineId);
 
+    const filteredCities = useSearchFilter(machines, searchTerm);
+    const filteredMachines = useSearchFilter(selectedCity?.automaty, searchTerm);
+
+
     if (loading) {
         return <p>Loading...</p>
     }
     if (error) {
         return <p>Error: {error.message}</p>
     }
-
-
 
 
     const hasExpiredSlot = (automat) => {
@@ -57,15 +39,6 @@ const TablePage = () => {
     };
 
 
-
-
-    const filteredCities = machines.filter((city) =>
-        objectMatchesSearch(city, searchTerm)
-    );
-
-    const filteredMachines = selectedCity?.automaty.filter((automat) =>
-        objectMatchesSearch(automat, searchTerm)
-    );
 
 
     return (
@@ -108,7 +81,7 @@ const TablePage = () => {
                             );
 
                             return (
-                                <tr key={city.city} onClick={() =>{navigate(`/${city.city}`); setSearchTerm("")}}>
+                                <tr key={city.city} onClick={() => { navigate(`/${city.city}`); setSearchTerm("") }}>
                                     <td>{city.city}</td>
                                     <td>{city.automaty.length}</td>
                                     <td>{hasEmptySlot ? "EMPTY" : "FULL"}</td>
@@ -140,7 +113,7 @@ const TablePage = () => {
                             return (
                                 <tr
                                     key={automat.id}
-                                    onClick={() =>{navigate(`/${selectedCity.city}/${automat.id}`); setSearchTerm("")} }
+                                    onClick={() => { navigate(`/${selectedCity.city}/${automat.id}`); setSearchTerm("") }}
                                 >
                                     <td>{automat.id}</td>
                                     <td>{automat.address}</td>
