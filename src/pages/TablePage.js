@@ -1,11 +1,40 @@
-import { useState } from "react";
 import { useFetchData } from "../hooks/useFetchData";
+import { useParams, useNavigate } from "react-router-dom";
+import { useState } from "react"
+import SearchBar from "../components/searchBar/SearchBar";
 import "./styles.css";
 
+
+
+const objectMatchesSearch = (obj, term) => {
+    const lowerTerm = term.toLowerCase();
+
+    return Object.values(obj).some((value) => {
+        if (typeof value === "string" || typeof value === "number") {
+            return String(value).toLowerCase().includes(lowerTerm);
+        }
+
+        if (Array.isArray(value)) {
+            return value.some((item) => typeof item === "string" && item.toLowerCase().includes(lowerTerm));
+        }
+
+        if (typeof value === "object" && value !== null) {
+            return objectMatchesSearch(value, term); // rekurzivní hledání
+        }
+
+        return false;
+    });
+};
+
+
 const TablePage = () => {
-    const [selectedCity, setSelectedCity] = useState(null);
-    const [selectedMachine, setSelectedMachine] = useState(null);
+    const [searchTerm, setSearchTerm] = useState("");
+    const { cityId, machineId } = useParams();
+    const navigate = useNavigate();
     const { data: machines, loading, error } = useFetchData("/machines.json");
+
+    const selectedCity = machines?.find((c) => c.city.toLowerCase() === cityId?.toLowerCase());
+    const selectedMachine = selectedCity?.automaty.find((m) => m.id === machineId);
 
     if (loading) {
         return <p>Loading...</p>
@@ -13,6 +42,8 @@ const TablePage = () => {
     if (error) {
         return <p>Error: {error.message}</p>
     }
+
+
 
 
     const hasExpiredSlot = (automat) => {
@@ -25,17 +56,31 @@ const TablePage = () => {
         });
     };
 
+
+
+
+    const filteredCities = machines.filter((city) =>
+        objectMatchesSearch(city, searchTerm)
+    );
+
+    const filteredMachines = selectedCity?.automaty.filter((automat) =>
+        objectMatchesSearch(automat, searchTerm)
+    );
+
+
     return (
         <div>
-            <nav>
+            <SearchBar
+                value={searchTerm}
+                onChange={setSearchTerm}
+                placeholder="Hledat..."
+            />
+            <nav className="route-nav">
                 <ul>
-                    <li onClick={() => {
-                        setSelectedCity(null);
-                        setSelectedMachine(null);
-                    }}>Města</li>
+                    <li onClick={() => navigate("/")}>Města</li>
 
                     {selectedCity && (
-                        <li onClick={() => setSelectedMachine(null)}>
+                        <li onClick={() => navigate(`/${selectedCity.city}`)}>
                             / {selectedCity.city}
                         </li>
                     )}
@@ -43,6 +88,7 @@ const TablePage = () => {
                     {selectedMachine && (
                         <li>/ {selectedMachine.address}</li>
                     )}
+                    {selectedMachine && <li>/ {selectedMachine.address}</li>}
                 </ul>
             </nav>
             {!selectedCity && (
@@ -55,12 +101,14 @@ const TablePage = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {machines.map((city) => {
-                            const allSlots = city.automaty.flatMap((automat) => automat.slots);
-                            const hasEmptySlot = allSlots.some((slot) => !slot.item || slot.item.trim() === "");
+                        {filteredCities.map((city) => {
+                            const allSlots = city.automaty.flatMap((a) => a.slots);
+                            const hasEmptySlot = allSlots.some(
+                                (s) => !s.item || s.item.trim() === ""
+                            );
 
                             return (
-                                <tr key={city.id} onClick={() => setSelectedCity(city)}>
+                                <tr key={city.city} onClick={() =>{navigate(`/${city.city}`); setSearchTerm("")}}>
                                     <td>{city.city}</td>
                                     <td>{city.automaty.length}</td>
                                     <td>{hasEmptySlot ? "EMPTY" : "FULL"}</td>
@@ -70,7 +118,8 @@ const TablePage = () => {
                     </tbody>
                 </table>
             )}
-            {(selectedCity && !selectedMachine) && (
+
+            {selectedCity && !selectedMachine && (
                 <table>
                     <thead>
                         <tr>
@@ -82,15 +131,17 @@ const TablePage = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {selectedCity.automaty.map((automat) => {
+                        {filteredMachines.map((automat) => {
                             const hasEmptySlot = automat.slots.some(
                                 (slot) => !slot.item || slot.item.trim() === ""
                             );
-
                             const isExpired = hasExpiredSlot(automat);
 
                             return (
-                                <tr key={automat.id} onClick={() => setSelectedMachine(automat)}>
+                                <tr
+                                    key={automat.id}
+                                    onClick={() =>{navigate(`/${selectedCity.city}/${automat.id}`); setSearchTerm("")} }
+                                >
                                     <td>{automat.id}</td>
                                     <td>{automat.address}</td>
                                     <td>{automat.gps.join(", ")}</td>
@@ -102,25 +153,24 @@ const TablePage = () => {
                     </tbody>
                 </table>
             )}
+
             {selectedMachine && (
                 <table>
                     <thead>
                         <tr>
-                            <td>ID</td>
-                            <td>Jídlo</td>
-                            <td>Vloženo</td>
+                            <th>ID</th>
+                            <th>Jídlo</th>
+                            <th>Vloženo</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {selectedMachine.slots.map((item) => {
-                            return (
-                                <tr key={item.id}>
-                                    <td>{item.id}</td>
-                                    <td>{item.item}</td>
-                                    <td>{item.placedAt}</td>
-                                </tr>
-                            )
-                        })}
+                        {selectedMachine.slots.map((slot) => (
+                            <tr key={slot.id}>
+                                <td>{slot.id}</td>
+                                <td>{slot.item}</td>
+                                <td>{slot.placedAt}</td>
+                            </tr>
+                        ))}
                     </tbody>
                 </table>
             )}

@@ -5,7 +5,9 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path="/table" element={<TablePage />} />
+        <Route path="/" element={<TablePage />} />
+        <Route path="/:cityId" element={<TablePage />} />
+        <Route path="/:cityId/:machineId" element={<TablePage />} />
       </Routes>
     </>
   );
