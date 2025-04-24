@@ -1,0 +1,15 @@
+.tag-wrapper{
+    padding: 8px 16px;
+    border-radius: 16px;
+    display: inline-flex;
+}
+
+.tag-wrapper.ok{
+    background-color: #44b063;
+    color: #ffff;
+}
+
+.tag-wrapper.alert{
+    background-color: #b04444;
+    color: #ffff;
+}

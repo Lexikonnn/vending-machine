@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useState } from "react"
 import SearchBar from "../components/searchBar/SearchBar";
 import { useSearchFilter } from "../hooks/useSearchFilter";
+import Tag from "../components/tag/Tag";
 import "./styles.css";
 
 
@@ -43,6 +44,7 @@ const TablePage = () => {
 
     return (
         <div>
+            <h1>Seznam Automatů</h1>
             <SearchBar
                 value={searchTerm}
                 onChange={setSearchTerm}
@@ -50,18 +52,27 @@ const TablePage = () => {
             />
             <nav className="route-nav">
                 <ul>
-                    <li onClick={() => navigate("/")}>Města</li>
+                    <li
+                        className={!cityId ? "active" : ""}
+                        onClick={() => navigate("/")}
+                    >
+                        Města
+                    </li>
 
                     {selectedCity && (
-                        <li onClick={() => navigate(`/${selectedCity.city}`)}>
-                            / {selectedCity.city}
+                        <li
+                            className={cityId && !machineId ? "active" : ""}
+                            onClick={() => navigate(`/${selectedCity.city}`)}
+                        >
+                            {selectedCity.city}
                         </li>
                     )}
 
                     {selectedMachine && (
-                        <li>/ {selectedMachine.address}</li>
+                        <li className={machineId ? "active" : ""}>
+                            {selectedMachine.address}
+                        </li>
                     )}
-                    {selectedMachine && <li>/ {selectedMachine.address}</li>}
                 </ul>
             </nav>
             {!selectedCity && (
@@ -81,10 +92,10 @@ const TablePage = () => {
                             );
 
                             return (
-                                <tr key={city.city} onClick={() => { navigate(`/${city.city}`); setSearchTerm("") }}>
+                                <tr key={city.id} onClick={() => { navigate(`/${city.city}`); setSearchTerm("") }}>
                                     <td>{city.city}</td>
                                     <td>{city.automaty.length}</td>
-                                    <td>{hasEmptySlot ? "EMPTY" : "FULL"}</td>
+                                    <td><Tag state={hasEmptySlot == true ? "alert" : "ok"}>{hasEmptySlot ? "EMPTY" : "FULL"}</Tag></td>
                                 </tr>
                             );
                         })}
@@ -119,7 +130,7 @@ const TablePage = () => {
                                     <td>{automat.address}</td>
                                     <td>{automat.gps.join(", ")}</td>
                                     <td>{hasEmptySlot ? "EMPTY" : "FULL"}</td>
-                                    <td>{isExpired ? "EXPIRED" : "OK"}</td>
+                                    <td><Tag state={isExpired == true ? "alert" : "ok"}>{isExpired ? "EXPIRED" : "OK"}</Tag></td>
                                 </tr>
                             );
                         })}
