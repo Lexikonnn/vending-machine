@@ -1,0 +1,35 @@
+table {
+    font-family: sans-serif;
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+thead{
+    background-color: #ff9462dd;
+
+}
+
+th,
+td {
+    border: 1px solid #ccc;
+    padding: 16px;
+    text-align: left;
+    cursor: pointer;
+    background-color: #fff9f7dd;
+}
+
+
+tbody tr:hover {
+    background-color: #ffbea0dd;
+    transition: 120ms;
+}
+
+ul {
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    cursor: pointer;
+}

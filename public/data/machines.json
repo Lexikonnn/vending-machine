@@ -1,61 +1,61 @@
 [
-    {
-      "city": "Praha",
-      "automaty": [
-        {
-          "id": "PRA001",
-          "address": "Václavské náměstí 5",
-          "gps": [50.081, 14.425],
-          "slots": [
-            { "id": "A1", "item": "Bageta" },
-            { "id": "A2", "item": "Sendvič" },
-            { "id": "A3", "item": null },
-            { "id": "A4", "item": "Croissant" },
-            { "id": "A5", "item": null }
-          ]
-        },
-        {
-          "id": "PRA002",
-          "address": "Karlovo náměstí 12",
-          "gps": [50.075, 14.418],
-          "slots": [
-            { "id": "B1", "item": "Jablko" },
-            { "id": "B2", "item": null },
-            { "id": "B3", "item": "Salát" }
-          ]
-        }
-      ]
-    },
-    {
-      "city": "Brno",
-      "automaty": [
-        {
-          "id": "BRN001",
-          "address": "náměstí Svobody 1",
-          "gps": [49.195, 16.608],
-          "slots": [
-            { "id": "C1", "item": "Jogurt" },
-            { "id": "C2", "item": null },
-            { "id": "C3", "item": "Sendvič" },
-            { "id": "C4", "item": "Bageta" }
-          ]
-        }
-      ]
-    },
-    {
-      "city": "Ostrava",
-      "automaty": [
-        {
-          "id": "OST001",
-          "address": "Stodolní 3",
-          "gps": [49.835, 18.292],
-          "slots": [
-            { "id": "D1", "item": "Voda" },
-            { "id": "D2", "item": null },
-            { "id": "D3", "item": null },
-            { "id": "D4", "item": "Čokoláda" }
-          ]
-        }
-      ]
-    }
-  ]
+  {
+    "city": "Praha",
+    "automaty": [
+      {
+        "id": "PRA001",
+        "address": "Václavské náměstí 5",
+        "gps": [50.081, 14.425],
+        "slots": [
+          { "id": "A1", "item": "Bageta", "placedAt": "2025-04-21" },
+          { "id": "A2", "item": "Sendvič", "placedAt": "2025-04-20" },
+          { "id": "A3", "item": "Croissant", "placedAt": "2025-04-22" },
+          { "id": "A4", "item": "Muffin", "placedAt": "2025-04-21" },
+          { "id": "A5", "item": "Wrap", "placedAt": "2025-04-20" }
+        ]
+      },
+      {
+        "id": "PRA002",
+        "address": "Karlovo náměstí 12",
+        "gps": [50.075, 14.418],
+        "slots": [
+          { "id": "B1", "item": "Jablko", "placedAt": "2025-04-24" },
+          { "id": "B2", "item": "Hroznové víno", "placedAt": "2025-04-24" },
+          { "id": "B3", "item": "", "placedAt": "" }
+        ]
+      }
+    ]
+  },
+  {
+    "city": "Brno",
+    "automaty": [
+      {
+        "id": "BRN001",
+        "address": "náměstí Svobody 1",
+        "gps": [49.195, 16.608],
+        "slots": [
+          { "id": "C1", "item": "Jogurt", "placedAt": "2025-04-21" },
+          { "id": "C2", "item": "Banán", "placedAt": "2025-04-22" },
+          { "id": "C3", "item": "Sendvič", "placedAt": "2025-04-20" },
+          { "id": "C4", "item": "Pomazánka", "placedAt": "2025-04-21" }
+        ]
+      }
+    ]
+  },
+  {
+    "city": "Ostrava",
+    "automaty": [
+      {
+        "id": "OST001",
+        "address": "Stodolní 3",
+        "gps": [49.835, 18.292],
+        "slots": [
+          { "id": "D1", "item": "Voda", "placedAt": "2025-04-20" },
+          { "id": "D2", "item": "Čokoláda", "placedAt": "2025-04-22" },
+          { "id": "D3", "item": "Sušenka", "placedAt": "2025-04-21" },
+          { "id": "D4", "item": "Bílý jogurt", "placedAt": "2025-04-20" }
+        ]
+      }
+    ]
+  }
+]

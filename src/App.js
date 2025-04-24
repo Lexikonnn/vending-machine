@@ -1,13 +1,11 @@
 import { Routes, Route } from "react-router-dom";
-import LocationsPage from "./pages/LocationsPage";
-import MachinePage from "./pages/MachinePage";
+import TablePage from "./pages/TablePage";
 
 function App() {
   return (
     <>
       <Routes>
-        <Route path="/locations" element={<LocationsPage />} />
-        <Route path="/lmachines" element={<MachinePage />} />
+        <Route path="/table" element={<TablePage />} />
       </Routes>
     </>
   );
