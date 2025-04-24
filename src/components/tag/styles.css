@@ -5,11 +5,11 @@
 }
 
 .tag-wrapper.ok{
-    background-color: #44b063;
+    background-color: #44b063c9;
     color: #ffff;
 }
 
 .tag-wrapper.alert{
-    background-color: #b04444;
+    background-color: #b04444d9;
     color: #ffff;
 }

@@ -2,17 +2,15 @@ table {
     font-family: sans-serif;
     width: 100%;
     border-collapse: collapse;
-    border-radius: 10px;
+    border-radius: 0 10px 10px 10px;
     overflow: hidden;
     color: #1b1b1b;
 }
 
-/* Hlavička tabulky */
 thead {
     background-color: var(--base-color);
 }
 
-/* Obecné buňky */
 th,
 td {
     border: 1px solid #DFDBD8;
@@ -20,19 +18,16 @@ td {
     text-align: left;
 }
 
-/* Tělo tabulky: výchozí pozadí */
 tbody tr {
-    background-color: var(--milky);
+    background-color: #ffff;
     transition: background-color 120ms ease;
     cursor: pointer;
 }
 
-/* Hover efekt na celý řádek */
 tbody tr:hover {
     background-color: var(--base-color);
 }
 
-/* Navigace */
 ul {
     display: flex;
     flex-direction: row;
@@ -41,8 +36,9 @@ ul {
 }
 
 .route-nav {
-    font-size: 1.1em;
+    font-size: 1em;
     color: #1b1b1b;
+    width: fit-content;
 }
 
 
@@ -56,7 +52,7 @@ ul {
   
 .route-nav ul li:hover{
     transform: 120ms;
-    scale: 105%;
+    scale: 110%;
 }
 
   .route-nav ul li.active {
@@ -64,4 +60,10 @@ ul {
     transition: 120ms;
     scale: 100% !important;
     color: #1b1b1b;
+    font-weight: 600;
+  }
+
+  .table-wrapper{
+    margin: 32px;
+    width: 100%;
   }

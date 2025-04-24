@@ -5,23 +5,101 @@
       {
         "id": "PRA001",
         "address": "Václavské náměstí 5",
-        "gps": [50.081, 14.425],
+        "gps": [
+          50.081,
+          14.425
+        ],
         "slots": [
-          { "id": "A1", "item": "Bageta", "placedAt": "2025-04-21" },
-          { "id": "A2", "item": "Sendvič", "placedAt": "2025-04-20" },
-          { "id": "A3", "item": "Croissant", "placedAt": "2025-04-22" },
-          { "id": "A4", "item": "Muffin", "placedAt": "2025-04-21" },
-          { "id": "A5", "item": "Wrap", "placedAt": "2025-04-20" }
+          {
+            "id": "A1",
+            "item": "Kuřecí řízek s bramborem",
+            "placedAt": "2025-04-21"
+          },
+          {
+            "id": "A2",
+            "item": "Hovězí guláš s knedlíkem",
+            "placedAt": "2025-04-20"
+          },
+          {
+            "id": "A3",
+            "item": "Rajská s těstovinami",
+            "placedAt": "2025-04-22"
+          },
+          {
+            "id": "A4",
+            "item": "Zeleninové rizoto",
+            "placedAt": "2025-04-21"
+          },
+          {
+            "id": "A5",
+            "item": "Čočkový talíř s vejcem",
+            "placedAt": "2025-04-20"
+          }
         ]
       },
       {
         "id": "PRA002",
         "address": "Karlovo náměstí 12",
-        "gps": [50.075, 14.418],
+        "gps": [
+          50.075,
+          14.418
+        ],
         "slots": [
-          { "id": "B1", "item": "Jablko", "placedAt": "2025-04-24" },
-          { "id": "B2", "item": "Hroznové víno", "placedAt": "2025-04-24" },
-          { "id": "B3", "item": "", "placedAt": "" }
+          {
+            "id": "B1",
+            "item": "Bramborový salát s kuřecím",
+            "placedAt": "2025-04-24"
+          },
+          {
+            "id": "B2",
+            "item": "Zeleninový salát s vajíčkem",
+            "placedAt": "2025-04-24"
+          },
+          {
+            "id": "B3",
+            "item": "",
+            "placedAt": ""
+          },
+          {
+            "id": "B4",
+            "item": "Hrášková polévka",
+            "placedAt": "2025-04-22"
+          },
+          {
+            "id": "B5",
+            "item": null,
+            "placedAt": null
+          }
+        ]
+      },
+      {
+        "id": "PRA003",
+        "address": "Florenc 8",
+        "gps": [
+          50.089,
+          14.439
+        ],
+        "slots": [
+          {
+            "id": "C1",
+            "item": "Segedínský guláš",
+            "placedAt": "2025-04-24"
+          },
+          {
+            "id": "C2",
+            "item": "Kuřecí na žampionech",
+            "placedAt": "2025-04-24"
+          },
+          {
+            "id": "C3",
+            "item": "Kuskus se zeleninou",
+            "placedAt": "2025-04-23"
+          },
+          {
+            "id": "C4",
+            "item": "Rizoto s hráškem",
+            "placedAt": "2025-04-24"
+          }
         ]
       }
     ]
@@ -32,12 +110,61 @@
       {
         "id": "BRN001",
         "address": "náměstí Svobody 1",
-        "gps": [49.195, 16.608],
+        "gps": [
+          49.195,
+          16.608
+        ],
         "slots": [
-          { "id": "C1", "item": "Jogurt", "placedAt": "2025-04-21" },
-          { "id": "C2", "item": "Banán", "placedAt": "2025-04-22" },
-          { "id": "C3", "item": "Sendvič", "placedAt": "2025-04-20" },
-          { "id": "C4", "item": "Pomazánka", "placedAt": "2025-04-21" }
+          {
+            "id": "C1",
+            "item": "Červená čočka na kari",
+            "placedAt": "2025-04-21"
+          },
+          {
+            "id": "C2",
+            "item": "Smažený květák s bramborem",
+            "placedAt": "2025-04-22"
+          },
+          {
+            "id": "C3",
+            "item": "",
+            "placedAt": ""
+          },
+          {
+            "id": "C4",
+            "item": "Cizrnový salát",
+            "placedAt": "2025-04-21"
+          }
+        ]
+      },
+      {
+        "id": "BRN002",
+        "address": "Česká 10",
+        "gps": [
+          49.198,
+          16.607
+        ],
+        "slots": [
+          {
+            "id": "D1",
+            "item": "Bramborová polévka",
+            "placedAt": "2025-04-23"
+          },
+          {
+            "id": "D2",
+            "item": null,
+            "placedAt": ""
+          },
+          {
+            "id": "D3",
+            "item": "Koprová omáčka s vejcem",
+            "placedAt": "2025-04-24"
+          },
+          {
+            "id": "D4",
+            "item": "Těstovinový salát",
+            "placedAt": "2025-04-22"
+          }
         ]
       }
     ]
@@ -48,12 +175,131 @@
       {
         "id": "OST001",
         "address": "Stodolní 3",
-        "gps": [49.835, 18.292],
+        "gps": [
+          49.835,
+          18.292
+        ],
         "slots": [
-          { "id": "D1", "item": "Voda", "placedAt": "2025-04-20" },
-          { "id": "D2", "item": "Čokoláda", "placedAt": "2025-04-22" },
-          { "id": "D3", "item": "Sušenka", "placedAt": "2025-04-21" },
-          { "id": "D4", "item": "Bílý jogurt", "placedAt": "2025-04-20" }
+          {
+            "id": "E1",
+            "item": "Hrachová polévka",
+            "placedAt": "2025-04-20"
+          },
+          {
+            "id": "E2",
+            "item": "Boloňské špagety",
+            "placedAt": "2025-04-22"
+          },
+          {
+            "id": "E3",
+            "item": "Španělský ptáček",
+            "placedAt": "2025-04-21"
+          },
+          {
+            "id": "E4",
+            "item": "",
+            "placedAt": ""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "city": "Plzeň",
+    "automaty": [
+      {
+        "id": "PLZ001",
+        "address": "Americká 45",
+        "gps": [
+          49.748,
+          13.377
+        ],
+        "slots": [
+          {
+            "id": "F1",
+            "item": "Vepřová pečeně s rýží",
+            "placedAt": "2025-04-24"
+          },
+          {
+            "id": "F2",
+            "item": "Zeleninové lečo",
+            "placedAt": "2025-04-22"
+          },
+          {
+            "id": "F3",
+            "item": null,
+            "placedAt": ""
+          },
+          {
+            "id": "F4",
+            "item": "Kuře na paprice",
+            "placedAt": "2025-04-23"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "city": "Liberec",
+    "automaty": [
+      {
+        "id": "LIB001",
+        "address": "Revoluční 10",
+        "gps": [
+          50.767,
+          15.056
+        ],
+        "slots": [
+          {
+            "id": "G1",
+            "item": "Grilovaný losos s rýží",
+            "placedAt": "2025-04-24"
+          },
+          {
+            "id": "G2",
+            "item": "Vegetariánské kari",
+            "placedAt": "2025-04-24"
+          },
+          {
+            "id": "G3",
+            "item": "Polévka z červené čočky",
+            "placedAt": "2025-04-24"
+          },
+          {
+            "id": "G4",
+            "item": "Bramborové noky se špenátem",
+            "placedAt": "2025-04-24"
+          }
+        ]
+      },
+      {
+        "id": "LIB002",
+        "address": "Moskevská 33",
+        "gps": [
+          50.770,
+          15.058
+        ],
+        "slots": [
+          {
+            "id": "H1",
+            "item": "Hovězí na houbách s rýží",
+            "placedAt": "2025-04-24"
+          },
+          {
+            "id": "H2",
+            "item": "Cizrnový guláš",
+            "placedAt": "2025-04-24"
+          },
+          {
+            "id": "H3",
+            "item": "Těstoviny s bazalkovým pestem",
+            "placedAt": "2025-04-24"
+          },
+          {
+            "id": "H4",
+            "item": "Zapečené brambory s vejcem",
+            "placedAt": "2025-04-24"
+          }
         ]
       }
     ]

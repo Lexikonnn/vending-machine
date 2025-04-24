@@ -3,7 +3,9 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useState } from "react"
 import SearchBar from "../components/searchBar/SearchBar";
 import { useSearchFilter } from "../hooks/useSearchFilter";
+import { hasExpiredSlot } from "../utils/expiration";
 import Tag from "../components/tag/Tag";
+import MainLayout from "../layout/MainLayout";
 import "./styles.css";
 
 
@@ -29,136 +31,147 @@ const TablePage = () => {
     }
 
 
-    const hasExpiredSlot = (automat) => {
-        const now = new Date();
-        return automat.slots.some(slot => {
-            if (!slot.placedAt) return false;
-            const placedDate = new Date(slot.placedAt);
-            const diffInDays = (now - placedDate) / (1000 * 60 * 60 * 24);
-            return diffInDays > 2;
-        });
-    };
-
-
 
 
     return (
-        <div>
-            <h1>Seznam Automatů</h1>
-            <SearchBar
-                value={searchTerm}
-                onChange={setSearchTerm}
-                placeholder="Hledat..."
-            />
-            <nav className="route-nav">
-                <ul>
-                    <li
-                        className={!cityId ? "active" : ""}
-                        onClick={() => navigate("/")}
-                    >
-                        Města
-                    </li>
-
-                    {selectedCity && (
+        <MainLayout>
+            <div className="table-wrapper">
+                <h1>Seznam Automatů</h1>
+                <SearchBar
+                    value={searchTerm}
+                    onChange={setSearchTerm}
+                    placeholder="Hledat..."
+                />
+                <nav className="route-nav">
+                    <ul>
                         <li
-                            className={cityId && !machineId ? "active" : ""}
-                            onClick={() => navigate(`/${selectedCity.city}`)}
+                            className={!cityId ? "active" : ""}
+                            onClick={() => navigate("/")}
                         >
-                            {selectedCity.city}
+                            Města
                         </li>
-                    )}
 
-                    {selectedMachine && (
-                        <li className={machineId ? "active" : ""}>
-                            {selectedMachine.address}
-                        </li>
-                    )}
-                </ul>
-            </nav>
-            {!selectedCity && (
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Město</th>
-                            <th>Počet automatů</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {filteredCities.map((city) => {
-                            const allSlots = city.automaty.flatMap((a) => a.slots);
-                            const hasEmptySlot = allSlots.some(
-                                (s) => !s.item || s.item.trim() === ""
-                            );
+                        {selectedCity && (
+                            <li
+                                className={cityId && !machineId ? "active" : ""}
+                                onClick={() => navigate(`/${selectedCity.city}`)}
+                            >
+                                {selectedCity.city}
+                            </li>
+                        )}
 
-                            return (
-                                <tr key={city.id} onClick={() => { navigate(`/${city.city}`); setSearchTerm("") }}>
-                                    <td>{city.city}</td>
-                                    <td>{city.automaty.length}</td>
-                                    <td><Tag state={hasEmptySlot == true ? "alert" : "ok"}>{hasEmptySlot ? "EMPTY" : "FULL"}</Tag></td>
-                                </tr>
-                            );
-                        })}
-                    </tbody>
-                </table>
-            )}
-
-            {selectedCity && !selectedMachine && (
-                <table>
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Adresa</th>
-                            <th>GPS</th>
-                            <th>Status</th>
-                            <th>Umístěno</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {filteredMachines.map((automat) => {
-                            const hasEmptySlot = automat.slots.some(
-                                (slot) => !slot.item || slot.item.trim() === ""
-                            );
-                            const isExpired = hasExpiredSlot(automat);
-
-                            return (
-                                <tr
-                                    key={automat.id}
-                                    onClick={() => { navigate(`/${selectedCity.city}/${automat.id}`); setSearchTerm("") }}
-                                >
-                                    <td>{automat.id}</td>
-                                    <td>{automat.address}</td>
-                                    <td>{automat.gps.join(", ")}</td>
-                                    <td>{hasEmptySlot ? "EMPTY" : "FULL"}</td>
-                                    <td><Tag state={isExpired == true ? "alert" : "ok"}>{isExpired ? "EXPIRED" : "OK"}</Tag></td>
-                                </tr>
-                            );
-                        })}
-                    </tbody>
-                </table>
-            )}
-
-            {selectedMachine && (
-                <table>
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Jídlo</th>
-                            <th>Vloženo</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {selectedMachine.slots.map((slot) => (
-                            <tr key={slot.id}>
-                                <td>{slot.id}</td>
-                                <td>{slot.item}</td>
-                                <td>{slot.placedAt}</td>
+                        {selectedMachine && (
+                            <li className={machineId ? "active" : ""}>
+                                {selectedMachine.address}
+                            </li>
+                        )}
+                    </ul>
+                </nav>
+                {!selectedCity && (
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Město</th>
+                                <th>Počet automatů</th>
+                                <th>Plnost</th>
+                                <th>Expirace</th>
                             </tr>
-                        ))}
-                    </tbody>
-                </table>
-            )}
-        </div>
+                        </thead>
+                        <tbody>
+                            {filteredCities.map((city) => {
+                                const allSlots = city.automaty.flatMap((a) => a.slots);
+                                const hasEmptySlot = allSlots.some(
+                                    (s) => !s.item || s.item.trim() === ""
+                                );
+
+                                const isExpired = hasExpiredSlot(city);
+
+                                return (
+                                    <tr key={city.city} onClick={() => { navigate(`/${city.city}`); setSearchTerm("") }}>
+                                        <td>{city.city}</td>
+                                        <td>{city.automaty.length}</td>
+                                        <td>
+                                            <Tag state={hasEmptySlot ? "alert" : "ok"}>
+                                                {hasEmptySlot ? "EMPTY" : "FULL"}
+                                            </Tag>
+                                        </td>
+                                        <td>
+                                            <Tag state={isExpired ? "alert" : "ok"}>
+                                                {isExpired ? "EXPIRED" : "FRESH"}
+                                            </Tag>
+                                        </td>
+                                    </tr>
+                                );
+                            })}
+                        </tbody>
+                    </table>
+                )}
+
+                {selectedCity && !selectedMachine && (
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Adresa</th>
+                                <th>GPS</th>
+                                <th>Status</th>
+                                <th>Expirace</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {filteredMachines.map((automat) => {
+                                const hasEmptySlot = automat.slots.some(
+                                    (slot) => !slot.item || slot.item.trim() === ""
+                                );
+                                const isExpired = hasExpiredSlot(automat);
+
+                                return (
+                                    <tr
+                                        key={automat.id}
+                                        onClick={() => { navigate(`/${selectedCity.city}/${automat.id}`); setSearchTerm("") }}
+                                    >
+                                        <td>{automat.id}</td>
+                                        <td>{automat.address}</td>
+                                        <td>{automat.gps.join(", ")}</td>
+                                        <td>
+                                            <Tag state={hasEmptySlot ? "alert" : "ok"}>
+                                                {hasEmptySlot ? "EMPTY" : "FULL"}
+                                            </Tag>
+                                        </td>
+                                        <td>
+                                            <Tag state={isExpired ? "alert" : "ok"}>
+                                                {isExpired ? "EXPIRED" : "FRESH"}
+                                            </Tag>
+                                        </td>
+                                    </tr>
+                                );
+                            })}
+                        </tbody>
+                    </table>
+                )}
+
+                {selectedMachine && (
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Jídlo</th>
+                                <th>Vloženo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {selectedMachine.slots.map((slot) => (
+                                <tr key={slot.id}>
+                                    <td>{slot.id}</td>
+                                    <td>{slot.item}</td>
+                                    <td>{slot.placedAt}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                )}
+            </div>
+        </MainLayout>
     );
 }
 
