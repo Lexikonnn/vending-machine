@@ -67,3 +67,9 @@ ul {
     margin: 32px;
     width: 100%;
   }
+
+  .tools-wrapper{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }

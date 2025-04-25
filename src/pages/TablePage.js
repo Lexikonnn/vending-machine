@@ -6,6 +6,7 @@ import { useSearchFilter } from "../hooks/useSearchFilter";
 import { hasExpiredSlot } from "../utils/expiration";
 import Tag from "../components/tag/Tag";
 import MainLayout from "../layout/MainLayout";
+import Button from "../components/button/Button";
 import "./styles.css";
 
 
@@ -37,11 +38,14 @@ const TablePage = () => {
         <MainLayout>
             <div className="table-wrapper">
                 <h1>Seznam Automatů</h1>
-                <SearchBar
-                    value={searchTerm}
-                    onChange={setSearchTerm}
-                    placeholder="Hledat..."
-                />
+                <div className="tools-wrapper">
+                    <SearchBar
+                        value={searchTerm}
+                        onChange={setSearchTerm}
+                        placeholder="Hledat..."
+                    />
+                    <div><Button>Nový Automat</Button></div>
+                </div>
                 <nav className="route-nav">
                     <ul>
                         <li
