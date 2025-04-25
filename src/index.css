@@ -7,7 +7,6 @@
 main{
     display: flex;
     flex-direction: row;
-    margin: 16px;
     border-radius: 16px;
     background-color: var(--milky);
 }

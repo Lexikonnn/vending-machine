@@ -7,12 +7,14 @@ import { hasExpiredSlot } from "../utils/expiration";
 import Tag from "../components/tag/Tag";
 import MainLayout from "../layout/MainLayout";
 import Button from "../components/button/Button";
+import Modal from "../components/modal/Modal";
 import "./styles.css";
 
 
 
 const TablePage = () => {
     const [searchTerm, setSearchTerm] = useState("");
+    const [showModal, setShowModal] = useState(false);
     const { cityId, machineId } = useParams();
     const navigate = useNavigate();
     const { data: machines, loading, error } = useFetchData("/machines.json");
@@ -44,7 +46,7 @@ const TablePage = () => {
                         onChange={setSearchTerm}
                         placeholder="Hledat..."
                     />
-                    <div><Button>Nový Automat</Button></div>
+                    <div><Button onClick={() => setShowModal(true)}>Nový Automat</Button></div>
                 </div>
                 <nav className="route-nav">
                     <ul>
@@ -175,6 +177,7 @@ const TablePage = () => {
                     </table>
                 )}
             </div>
+            {showModal ? <Modal onClose={() => setShowModal(false)} /> : null}
         </MainLayout>
     );
 }
